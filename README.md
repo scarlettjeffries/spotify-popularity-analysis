@@ -81,6 +81,21 @@ As you can see, there is not a strong correlation between either `danceability` 
 ></iframe>
 
 ### Interesting Aggregates
+I decided to further investigate how `artist_popularity`, `danceability`, `energy`, and `song_popularity` differs by genre. In the table below, the average of each of these features by genre is listed, sorted by decreasing average `song_popularity`. There are a couple interesting values that I noticed:
+- `indie` has generally lower scores across all features
+- `dance` has a significantly higher average artist popularity
+- `pop` has the highest average song popularity
+- `hip-hop` has the highest average danceability and energy, yet their average song popularity is one of the lowest
+
+| genre   |   artist_popularity |   danceability |   energy |   song_popularity |
+|:--------|--------------------:|---------------:|---------:|------------------:|
+| pop     |             70.4764 |       0.590764 | 0.601188 |           64.1845 |
+| rock    |             75.4531 |       0.5825   | 0.68252  |           62.6429 |
+| dance   |             82.5419 |       0.679802 | 0.691587 |           62.2961 |
+| hip-hop |             63.9738 |       0.709017 | 0.703697 |           60.4102 |
+| indie   |             50.0678 |       0.609059 | 0.608306 |           54.0118 |
+
+Since these features differ across genres, I will be sure to keep that in mind in later sections of this analysis.
 
 ## Assessment of Missingness
 
