@@ -139,7 +139,7 @@ For the baseline model, I used a <strong>Linear Regression</strong> model with 3
 - `danceability`: the danceability score between 0-1
 - `energy`: the energy score between 0-1
 - `artist_popularity`: the artist popularity score between 5-100
-    - <i>Note:</i> the scores fall between 5-100 rather than 0-100, since there was a disproportionate amount of scores close to 0 that were causing higher RMSE of the model, so I chose to focus on scores 5-100 since it still includes low-popularity scores, while keeping a significant amount of the data.
+    - The scores fall between 5-100 rather than 0-100, since there was a disproportionate amount of scores close to 0 that were causing higher RMSE of the model, so I chose to focus on scores 5-100 since it still includes low-popularity scores, while keeping a significant amount of the data.
     - Additionally, I dropped the rows with null artist popularity values, since there were only 139 out of 1402, which left me with 1263 data entries - a sufficient amount of data to build this model with.
 
 All of these features are <strong>quantitative</strong> (numerical) variables, so no additional encoding happened at this stage.
@@ -148,6 +148,34 @@ I used <strong>StandardScaler</strong> to standardize the features, and built th
 The low R<sup>2</sup> indicates that very little of the variance of the `song_popularity` is explained by the features in the current regression model. I plan to improve it by tuning hyperparameters and adding features in the next section.
 
 ## Final Model
+The final model I made added 3 new features:
+- `upbeatness`: After plotting the relationship between danceability and energy, there was a slight positive correlation between the two, so I added a feature representing the `danceability` x `energy`
+- `artist_popularity_relative`: Since there were distinct differences across genres as seen previously, I changed the `artist_popularity` to be relative to the genre it is in. The former `artist_popularity` score was replaced with the score relative to the genre
+- I added `genre` as a <strong>One-Hot Encoded</strong> nominal (categorical) feature. As `genre` seemed to be an important factor throughout this analysis, I used <strong>ColumnTransformer</strong> to <strong>One-Hot Encode</strong> the genre, so that it can be used as a feature in the model.
+
+Additionally, I changed the <strong>Linear Regression</strong> model to a <strong>Ridge Regression</strong> model. Since there are now more features than there previously were, ridge regression regularizes the model's coefficients to balance between a perfect fit and a generalized model. It penalizes the weight of the features' coefficients, so that the model can keep all features while still preventing overfitting. Additionally, the <strong>penalty (L2 regularization)</strong> is the <strong>hyperparameter</strong> I investigated to find the best penalty weight (alpha). I used <strong>GridSearchCV</strong> with the weight levels <strong>[0.01, 0.1, 1, 10, 100]</strong> to find the best estimator for the model. The best weight level (alpha) was <strong>1</strong>, resulting with the final model having a RMSE of <strong>14.0429</strong> and a R<sup>2</sup> of <strong>0.137</strong>.
+
+While the RMSE did not shrink significantly, the R<sup>2</sup> nearly doubled. While <strong>0.137</strong> is still a fairly low level of variability explained by the features, the model performance definitely improved from the baseline model.
 
 ## Fairness Analysis
+In the beginning, I questioned whether an artist's popularity would override the performance of the model, as a popular artist likely has a loyal fan base listening to the song. To evaluate the fairness of the model, I am going to see if the model performs better for less-popular artists vs popular artists. Specifically, I am defining "popular artists" as artists with a `popularity score` greater than or equal to <strong>70</strong>, and less-popular artists as artists with a popularity score less than <strong>70</strong>. For the evaluation metric, I will be using R<sup>2</sup>, since artist popularity is one of the predictors, and R<sup>2</sup> explain what proportion of the song popularity variance is explained by the predictors. R<sup>2</sup> was also the performance indicator that changed the most after improving the model, so I believe it would be a good statistic to evaluate the fairness of the model as well.
 
+In this permutation test, the null hypothesis would claim that the model performs equally accurate for less-popular and popular artists, and the alternate hypothesis claims that the model performs more accurately for less-popular artists. I am choosing these groups under the assumption that a song by a popular artist will automatically be popular, which slightly counfounds/dominates the model, and that lower levels (meaning, an up and coming artist) of popularity allow the model to work more accurately.
+
+- <strong>Null Hypothesis:</strong> The model performs with equal accuracy for less-popular and popular artists 
+- <strong>Alternate Hypothesis:</strong> The model performs more accurately for less-popular artists than popular artists
+- <strong>Test Statistic: </strong> Difference in R<sup>2</sup> (less-popular artist R<sup>2</sup> - popular artist R<sup>2</sup>)
+- <strong>Significance Level: </strong>0.05
+By repeatedly shuffling the genre 1000 times, I collected 1000 mean differences in R<sup>2</sup> between less-popular and popular artists. Additionally, I have plotted the distribution of test statistics and the observed statistic below, following the same format as the previous permutation test plots.
+<iframe
+  src="assets/artist_popularity_difference_perm.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+As we can see, the p-value is <strong>0.027</strong>, which is < 0.05 (threshold), meaning that the model does indeed perform better for less-popular artists who are not dominating the charts. Logically, this makes sense, as a song Taylor Swift releases is likely to be popular regardless of the danceability or energy, whereas these features may be more influential (therefore making the model more accurate) for an up and coming artist.
+
+
+## Conclusion
+Overall, `artist_popularity` seemed to be the most influential factor in predicting a song's popularity. Additionally, the ridge regression model predicted with the most accuracy for less-popular artists. While I wish the model was able to perform more accurately overall, there was still significant improvement betwen the baseline and final model. If you have read this far, thank you! And, if you have any <strong>danceable</strong> or <strong>energetic</strong> songs that are <i>not</i> popular yet, feel free to send them my way at scjeffries@ucsd.edu (I am always looking for new, fun songs). Thank you!
