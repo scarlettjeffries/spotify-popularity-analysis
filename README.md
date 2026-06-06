@@ -98,7 +98,20 @@ I decided to further investigate how `artist_popularity`, `danceability`, `energ
 Since these features differ across genres, I will be sure to keep that in mind in later sections of this analysis.
 
 ## Assessment of Missingness
+After checking null values, out of the columns that I am working with, only the `artist_popularity` column contains null values. Overall, I am working with 1402, with 139 of them having an empty `artist_popularity` score. I think that this score could be NMAR, as new artists may not have a popularity score yet. For instance, an artist who just released their first song may have all of the other song metadata, however since the artist has not released music before, they may not yet have an `artist_popularity` score. In order to assess this, I performed a missingness dependency permutation test to investigate whether `artist_popularity` is dependent on the column, `artist`. 
+- <strong>Null Hypothesis: </strong> the missing `artist_popularity` scores is independent of the `artist`
+- <strong>Alternate Hypothesis: </strong> the missing `artist_popularity` scores is independent of the `artist`
+- <strong>Test Statistic: </strong> using `.mean().var()` to compute the mean variance across artists for each simulation
+- <strong>Significance Level: </strong>0.05
+By repeatedly shuffling the artist popularity missingness 1000 times, I collected 1000 simulated mean variances. 
+<iframe
+  src="assets/missingness.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
+The observed test statistic of <strong>0.1696723760405482</strong> is represented as the red line in the plot. Since the p_value that we found <strong>0.0</strong> is < 0.05 which is the significance level that we set, we reject the null hypothesis, indicating that the `artist_popularity` does depend on the `artist`. I repeated this same procedure with the `danceability` and `artist_popularity`, and got a p-value of <strong>0.055</strong>, which is just over the significance level, meaning we cannot conclude that `artist_popularity` is dependent on `danceability`.
 ## Hypothesis Testing
 
 ## Framing a Prediction Problem
