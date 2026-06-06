@@ -19,16 +19,16 @@ Using the <strong>Spotify Music Track</strong> dataset adapted from the Spotify 
 
 ## Data Cleaning and Exploratory Data Analysis
 ### Data Cleaning
-In order to make the dataset more organized for the purpose of the analysis, I went through the following steps:
-1. Load in both the `music_tracks` and `artists` data sets.
-2. The `music_tracks` dataset listed multiple artist names separated by semicolons if a particular song had multiple artists. I first separated the artists into a list of artist names for each song, then exploded the `artists` column such that each row in the dataset for a song with multiple artists contained the same metadata, and each artist in the song had their own row.
-3. I performed a left-merge between the `music_tracks` and `artists` data, joining them on the column representing the name of the artist.
-4. Selected columns of interest for the analysis, which were `track_id`, `artists`, `track_name`, `popularity_x`, `danceability`, `energy`, `track_genre`, `name`, and `popularity_y`, with popularity_x and popularity_y representing song popularity and artist popularity, respectively. I later updated these column names to explicitly be `song_popularity` and `artist_popularity`.
-5. Since I exploded the dataset to get the rows on an artist level, I brought back to the song-level since I am interested in song popularity for this analysis. I grouped the data by the `track_id`, and stored the `artists` for songs with multiple artists as a list of artist names, and did the same thing for the `artist_popularity` column. 
-6. I converted the `artists_popularity` column to be the mean popularity score of all of the artists on the song. Since artist popularity is something I am interested in working with for this analysis, taking the mean seemed to represent the general popularity of the artist well.
-7. Lastly, I selected only 5 genres of interest for this analysis, and filtered the data for only songs labeled as `pop`, `hip-hop`, `rock`, `dance`, or `indie` since these genres cover a diverse range of music, and generally contained a sufficient amount of data as these are popular genres.
+In order to make the dataset more organized for the purpose of the analysis, I went through the following steps after loading in both the `music_tracks` and `artists` data sets.
+1. The `music_tracks` dataset listed multiple artist names separated by semicolons if a particular song had multiple artists. I first separated the artists into a list of artist names for each song, then exploded the `artists` column such that each row in the dataset for a song with multiple artists contained the same metadata, and each artist in the song had their own row.
+2. I performed a left-merge between the `music_tracks` and `artists` data, joining them on the column representing the name of the artist.
+3. Selected columns of interest for the analysis, which were `track_id`, `artists`, `track_name`, `popularity_x`, `danceability`, `energy`, `track_genre`, `name`, and `popularity_y`, with popularity_x and popularity_y representing song popularity and artist popularity, respectively. I later updated these column names to explicitly be `song_popularity` and `artist_popularity`.
+4. Since I exploded the dataset to get the rows on an artist level, I brought back to the song-level since I am interested in song popularity for this analysis. I grouped the data by the `track_id`, and stored the `artists` for songs with multiple artists as a list of artist names, and did the same thing for the `artist_popularity` column. 
+5. I converted the `artists_popularity` column to be the mean popularity score of all of the artists on the song. Since artist popularity is something I am interested in working with for this analysis, taking the mean seemed to represent the general popularity of the artist well.
+6. Lastly, I selected only 5 genres of interest for this analysis, and filtered the data for only songs labeled as `pop`, `hip-hop`, `rock`, `dance`, or `indie` since these genres cover a diverse range of music, and generally contained a sufficient amount of data as these are popular genres.
 <br>
 Take a look at the first few rows of the finalized dataset below: <br>
+
 |   level_0 |   index | artists                                                  | song_name               |   song_popularity |   danceability |   energy | genre   |   artist_popularity |
 |----------:|--------:|:---------------------------------------------------------|:------------------------|------------------:|---------------:|---------:|:--------|--------------------:|
 |         0 |       3 | ['Jordan Sandhu']                                        | Teeje Week              |                62 |          0.679 |    0.77  | hip-hop |                58   |
@@ -41,6 +41,7 @@ Take a look at the first few rows of the finalized dataset below: <br>
 |         7 |     352 | ['Wiz Khalifa', 'Girl Talk', 'Wiz Khalifa', 'Girl Talk'] | Big Daddy Wiz           |                 0 |          0.9   |    0.795 | dance   |                71   |
 |         8 |     384 | ['Lizzo', 'Pink Panda']                                  | Boys - Pink Panda Remix |                 0 |          0.853 |    0.938 | hip-hop |               nan   |
 |         9 |     402 | ['Bryan Adams', 'Bryan Adams', 'Bryan Adams']            | Summer Of '69           |                 0 |          0.5   |    0.908 | rock    |                79   |
+
 
 <iframe
   src="assets/song_popularity.html"
