@@ -50,7 +50,6 @@ First, I wanted to take a look at the general distribution of song popularity sc
   height="600"
   frameborder="0"
 ></iframe>
-
 As you can see, there seems to be a disproportionate amount of songs with a popularity score between 0-4. In order to reduct the effects of this on the analysis, while still preserving its impact in the data, I filtered the `song_popularity` to only contain songs with a popularity score greater than 2. See the results of that below.
 <iframe
   src="assets/song_popularity2.html"
@@ -60,7 +59,26 @@ As you can see, there seems to be a disproportionate amount of songs with a popu
 ></iframe>
 
 ### Bivariate Analysis
-
+Since I am interested in understanding `danceability` and `energy` scores so that they can be used to predict `song_popularity`, I decided to look at the relationship between each of those features and song popularity.
+<iframe
+  src="assets/danceability_popularity.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+<iframe
+  src="assets/energy_popularity.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+As you can see, there is not a strong correlation between either `danceability` or `energy` with `song_popularity`. Since there is a very slight correlation, I still plan on using them, but should investigate other factors that influence `song_popularity` as well. I decided to look at the relationship between `artist_popularity` and `song_popularity` since, logically, songs released by popular artists will likely be popular since popular artists have dedicated fans to listen to their music. See the outcome of this plot, and the positive correlation between artist and song popularity, below.
+<iframe
+  src="assets/artist_song_popularity.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
 ### Interesting Aggregates
 
