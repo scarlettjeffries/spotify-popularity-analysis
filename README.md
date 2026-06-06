@@ -135,6 +135,17 @@ After investigating the relationships between some variables, I plan to build a 
  Note that danceability and energy were not found to be that strongly correlated to song popularity, but since they are more impactful for certain genres such as dance and rock, I am planning on using them in this model.
 
 ## Baseline Model
+For the baseline model, I used a <strong>Linear Regression</strong> model with 3 predictors:
+- `danceability`: the danceability score between 0-1
+- `energy`: the energy score between 0-1
+- `artist_popularity`: the artist popularity score between 5-100
+    - <i>Note:</i> the scores fall between 5-100 rather than 0-100, since there was a disproportionate amount of scores close to 0 that were causing higher RMSE of the model, so I chose to focus on scores 5-100 since it still includes low-popularity scores, while keeping a significant amount of the data.
+    - Additionally, I dropped the rows with null artist popularity values, since there were only 139 out of 1402, which left me with 1263 data entries - a sufficient amount of data to build this model with.
+
+All of these features are <strong>quantitative</strong> (numerical) variables, so no additional encoding happened at this stage.
+I used <strong>StandardScaler</strong> to standardize the features, and built the model as a `sklearn` `Pipeline`. After fitting the model to the training data and predicting `song_popularity` on the test data, I found the performance of this model to be fairly poor. This model had a baseline RMSE of <strong>14.623</strong> and a R<sup>2</sup> of <strong>0.064</strong>.
+
+The low R<sup>2</sup> indicates that very little of the variance of the `song_popularity` is explained by the features in the current regression model. I plan to improve it by tuning hyperparameters and adding features in the next section.
 
 ## Final Model
 
