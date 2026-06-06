@@ -28,7 +28,7 @@ In order to make the dataset more organized for the purpose of the analysis, I w
 6. I converted the `artists_popularity` column to be the mean popularity score of all of the artists on the song. Since artist popularity is something I am interested in working with for this analysis, taking the mean seemed to represent the general popularity of the artist well.
 7. Lastly, I selected only 5 genres of interest for this analysis, and filtered the data for only songs labeled as `pop`, `hip-hop`, `rock`, `dance`, or `indie` since these genres cover a diverse range of music, and generally contained a sufficient amount of data as these are popular genres.
 <br>
-Take a look at the first few rows of the finalized dataset below:
+Take a look at the first few rows of the finalized dataset below: <br>
 |   level_0 |   index | artists                                                  | song_name               |   song_popularity |   danceability |   energy | genre   |   artist_popularity |
 |----------:|--------:|:---------------------------------------------------------|:------------------------|------------------:|---------------:|---------:|:--------|--------------------:|
 |         0 |       3 | ['Jordan Sandhu']                                        | Teeje Week              |                62 |          0.679 |    0.77  | hip-hop |                58   |
