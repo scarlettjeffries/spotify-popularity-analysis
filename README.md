@@ -29,18 +29,18 @@ In order to make the dataset more organized for the purpose of the analysis, I w
 7. Lastly, I selected only 5 genres of interest for this analysis, and filtered the data for only songs labeled as `pop`, `hip-hop`, `rock`, `dance`, or `indie` since these genres cover a diverse range of music, and generally contained a sufficient amount of data as these are popular genres.
 <br>
 Take a look at the first few rows of the finalized dataset below:
-|    |   index | artists                                                  | song_name               |   song_popularity |   danceability |   energy | genre   |   artist_popularity |
-|---:|--------:|:---------------------------------------------------------|:------------------------|------------------:|---------------:|---------:|:--------|--------------------:|
-|  0 |       3 | ['Jordan Sandhu']                                        | Teeje Week              |                62 |          0.679 |    0.77  | hip-hop |                58   |
-|  1 |      98 | ['Black Eyed Peas']                                      | I Gotta Feeling         |                 1 |          0.746 |    0.793 | dance   |                86   |
-|  2 |     110 | ['Bryan Adams', 'Bryan Adams', 'Bryan Adams']            | Merry Christmas         |                 0 |          0.683 |    0.511 | rock    |                79   |
-|  3 |     198 | ['Dua Lipa']                                             | Break My Heart          |                78 |          0.73  |    0.729 | dance   |                95   |
-|  4 |     215 | ['MC STAN']                                              | Astaghfirullah          |                58 |          0.653 |    0.725 | hip-hop |                57   |
-|  5 |     247 | ['Mac Miller', 'Ty Dolla $ign']                          | Cinderella              |                 0 |          0.408 |    0.533 | hip-hop |                87.5 |
-|  6 |     347 | ['Charlie Puth']                                         | One Call Away           |                 4 |          0.667 |    0.613 | dance   |                82   |
-|  7 |     352 | ['Wiz Khalifa', 'Girl Talk', 'Wiz Khalifa', 'Girl Talk'] | Big Daddy Wiz           |                 0 |          0.9   |    0.795 | dance   |                71   |
-|  8 |     384 | ['Lizzo', 'Pink Panda']                                  | Boys - Pink Panda Remix |                 0 |          0.853 |    0.938 | hip-hop |               nan   |
-|  9 |     402 | ['Bryan Adams', 'Bryan Adams', 'Bryan Adams']            | Summer Of '69           |                 0 |          0.5   |    0.908 | rock    |                79   |
+|   level_0 |   index | artists                                                  | song_name               |   song_popularity |   danceability |   energy | genre   |   artist_popularity |
+|----------:|--------:|:---------------------------------------------------------|:------------------------|------------------:|---------------:|---------:|:--------|--------------------:|
+|         0 |       3 | ['Jordan Sandhu']                                        | Teeje Week              |                62 |          0.679 |    0.77  | hip-hop |                58   |
+|         1 |      98 | ['Black Eyed Peas']                                      | I Gotta Feeling         |                 1 |          0.746 |    0.793 | dance   |                86   |
+|         2 |     110 | ['Bryan Adams', 'Bryan Adams', 'Bryan Adams']            | Merry Christmas         |                 0 |          0.683 |    0.511 | rock    |                79   |
+|         3 |     198 | ['Dua Lipa']                                             | Break My Heart          |                78 |          0.73  |    0.729 | dance   |                95   |
+|         4 |     215 | ['MC STAN']                                              | Astaghfirullah          |                58 |          0.653 |    0.725 | hip-hop |                57   |
+|         5 |     247 | ['Mac Miller', 'Ty Dolla $ign']                          | Cinderella              |                 0 |          0.408 |    0.533 | hip-hop |                87.5 |
+|         6 |     347 | ['Charlie Puth']                                         | One Call Away           |                 4 |          0.667 |    0.613 | dance   |                82   |
+|         7 |     352 | ['Wiz Khalifa', 'Girl Talk', 'Wiz Khalifa', 'Girl Talk'] | Big Daddy Wiz           |                 0 |          0.9   |    0.795 | dance   |                71   |
+|         8 |     384 | ['Lizzo', 'Pink Panda']                                  | Boys - Pink Panda Remix |                 0 |          0.853 |    0.938 | hip-hop |               nan   |
+|         9 |     402 | ['Bryan Adams', 'Bryan Adams', 'Bryan Adams']            | Summer Of '69           |                 0 |          0.5   |    0.908 | rock    |                79   |
 
 <iframe
   src="assets/song_popularity.html"
