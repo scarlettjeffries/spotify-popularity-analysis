@@ -129,6 +129,10 @@ By repeatedly shuffling the genre 1000 times, I collected 1000 mean differences 
 The observed test statistic of <strong>16.668</strong> is represented as the red line in the plot. Since the p_value that we found <strong>0.0</strong> is < 0.05 which is the significance level that we set, we reject the null hypothesis, indicating that the mean `artist_popularity` is indeed higher in `dance` artists than non-dance artists.
 
 ## Framing a Prediction Problem
+### Problem Identification
+After investigating the relationships between some variables, I plan to build a model to predict the <strong>popularity</strong> of a song based on its <strong>danceability</strong>, <strong>energy</strong>, and the <strong>artist's popularity</strong>. This is a regression problem to predict the `song_popularity` variable. Predicting the popularity of a song could be helpful for people who are planning to release music, especially upbeat music as I am using `danceability` and `energy` as features. Once a song is produced, the musician can esitmate or use sound analytics to find a `danceability` and `energy` score, so this information would be known at the time of prediction. Additionally, `song_popularity` changes according to users streams, however `danceability` and `energy` scores remain the same. I am also choosing to use `artist_popularity` as a feature, since as I explored above, there is a significant positive relationship between `artist_popularity` and `song_popularity`, meaning that it would likely be an influential factor when predicting song popularity.
+
+ Note that danceability and energy were not found to be that strongly correlated to song popularity, but since they are more impactful for certain genres such as dance and rock, I am planning on using them in this model.
 
 ## Baseline Model
 
