@@ -1,7 +1,7 @@
 # Danceability, Energy, and Song Popularity Analysis
 
-Final Project for DSC 80 @ UCSD using Spotify Dataset
-by Scarlett Jeffries
+Final Project for DSC 80 @ UCSD <br>
+by Scarlett Jeffries &#128516;
 
 ## Introduction
 I am choosing to work with a Spotify dataset, since I love music! Specifically, I enjoy upbeat and lively music, so I am interested in exploring if <strong>danceability</strong> and <strong>energy</strong> can predict the <strong>popularity</strong> of a song. Further, I am interested in exploring whether this relationship is counfounded by the <strong>genre</strong> of the song or the <strong>popularity</strong> of the artist. <br>
@@ -9,15 +9,39 @@ I am choosing to work with a Spotify dataset, since I love music! Specifically, 
 This analysis will first explore the dataset to understand the variables I am working with, with the goal of using the data to predict a particular song's popularity based on its danceability and energy scores. Next, it will explore whether the difference in popularity based on danceability and energy varies by genre by looking at 5 distinct genres: pop, hip-hop, rock, dance, and indie. Lastly, it will explore whether the association between song popularity and danceability/energy is confounded by artist popularity, and potentially explore the predictive model relative to the popularity of the artist. <br>
 
 Using the <strong>Spotify Music Track</strong> dataset adapted from the Spotify Dataset 1921-2020 by Yamac Eren Ay on Kaggle. This dataset contains data on the song metadata and artist data, which I will be combining to look at a few key features for this analysis. The columns of interest are:
-- `artists`: the name of the artist(s)
-- `track_name`: the song name
-- `song popularity`: Spotify popularity score from 0–100, based on total plays and recency. Higher = more popular
-- `danceability`: how suitable the track is for dancing, based on tempo, rhythm stability, and beat strength (0–1)
-- `energy`: perceptual intensity and activity: fast, loud, noisy tracks score high; classical scores low (0–1)
-- `track genre`: genre of the track, as labeled by Spotify
-- `artist popularity`: artist-level popularity score from 0–100, which is distinct from track popularity
+- `artists`: the name of the artist, or artists, if there are multiple.
+- `track name`: the song name
+- `song popularity`: the Spotify popularity score between 0–100 based on total plays and recency, where higher = more popular
+- `danceability`: how suitable the track is for dancing, based on tempo, rhythm stability, and beat strength (a score between 0–1)
+- `energy`: perceptual intensity and activity of the track: fast, loud, and noisy tracks score high, whereas classical music scores low (a score between 0–1)
+- `track genre`: the genre of the track, as labeled by Spotify
+- `artist popularity`: the artist-level popularity score between 0–100 indicating how popular an artist is (distinct from track popularity)
 
 ## Data Cleaning and Exploratory Data Analysis
+### Data Cleaning
+In order to make the dataset more organized for the purpose of the analysis, I went through the following steps:
+1. Load in both the `music_tracks` and `artists` data sets.
+2. The `music_tracks` dataset listed multiple artist names separated by semicolons if a particular song had multiple artists. I first separated the artists into a list of artist names for each song, then exploded the `artists` column such that each row in the dataset for a song with multiple artists contained the same metadata, and each artist in the song had their own row.
+3. I performed a left-merge between the `music_tracks` and `artists` data, joining them on the column representing the name of the artist.
+4. Selected columns of interest for the analysis, which were `track_id`, `artists`, `track_name`, `popularity_x`, `danceability`, `energy`, `track_genre`, `name`, and `popularity_y`, with popularity_x and popularity_y representing song popularity and artist popularity, respectively. I later updated these column names to explicitly be `song_popularity` and `artist_popularity`.
+5. Since I exploded the dataset to get the rows on an artist level, I brought back to the song-level since I am interested in song popularity for this analysis. I grouped the data by the `track_id`, and stored the `artists` for songs with multiple artists as a list of artist names, and did the same thing for the `artist_popularity` column. 
+6. I converted the `artists_popularity` column to be the mean popularity score of all of the artists on the song. Since artist popularity is something I am interested in working with for this analysis, taking the mean seemed to represent the general popularity of the artist well.
+7. Lastly, I selected only 5 genres of interest for this analysis, and filtered the data for only songs labeled as `pop`, `hip-hop`, `rock`, `dance`, or `indie` since these genres cover a diverse range of music, and generally contained a sufficient amount of data as these are popular genres.
+<br>
+Take a look at the first few rows of the finalized dataset below:
+|    |   index | artists                                                  | song_name               |   song_popularity |   danceability |   energy | genre   |   artist_popularity |
+|---:|--------:|:---------------------------------------------------------|:------------------------|------------------:|---------------:|---------:|:--------|--------------------:|
+|  0 |       3 | ['Jordan Sandhu']                                        | Teeje Week              |                62 |          0.679 |    0.77  | hip-hop |                58   |
+|  1 |      98 | ['Black Eyed Peas']                                      | I Gotta Feeling         |                 1 |          0.746 |    0.793 | dance   |                86   |
+|  2 |     110 | ['Bryan Adams', 'Bryan Adams', 'Bryan Adams']            | Merry Christmas         |                 0 |          0.683 |    0.511 | rock    |                79   |
+|  3 |     198 | ['Dua Lipa']                                             | Break My Heart          |                78 |          0.73  |    0.729 | dance   |                95   |
+|  4 |     215 | ['MC STAN']                                              | Astaghfirullah          |                58 |          0.653 |    0.725 | hip-hop |                57   |
+|  5 |     247 | ['Mac Miller', 'Ty Dolla $ign']                          | Cinderella              |                 0 |          0.408 |    0.533 | hip-hop |                87.5 |
+|  6 |     347 | ['Charlie Puth']                                         | One Call Away           |                 4 |          0.667 |    0.613 | dance   |                82   |
+|  7 |     352 | ['Wiz Khalifa', 'Girl Talk', 'Wiz Khalifa', 'Girl Talk'] | Big Daddy Wiz           |                 0 |          0.9   |    0.795 | dance   |                71   |
+|  8 |     384 | ['Lizzo', 'Pink Panda']                                  | Boys - Pink Panda Remix |                 0 |          0.853 |    0.938 | hip-hop |               nan   |
+|  9 |     402 | ['Bryan Adams', 'Bryan Adams', 'Bryan Adams']            | Summer Of '69           |                 0 |          0.5   |    0.908 | rock    |                79   |
+
 <iframe
   src="assets/song_popularity.html"
   width="800"
