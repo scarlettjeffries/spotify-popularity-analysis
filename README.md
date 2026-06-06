@@ -111,8 +111,22 @@ By repeatedly shuffling the artist popularity missingness 1000 times, I collecte
   frameborder="0"
 ></iframe>
 
-The observed test statistic of <strong>0.1696723760405482</strong> is represented as the red line in the plot. Since the p_value that we found <strong>0.0</strong> is < 0.05 which is the significance level that we set, we reject the null hypothesis, indicating that the `artist_popularity` does depend on the `artist`. I repeated this same procedure with the `danceability` and `artist_popularity`, and got a p-value of <strong>0.055</strong>, which is just over the significance level, meaning we cannot conclude that `artist_popularity` is dependent on `danceability`.
+The observed test statistic of <strong>0.169</strong> is represented as the red line in the plot. Since the p_value that we found <strong>0.0</strong> is < 0.05 which is the significance level that we set, we reject the null hypothesis, indicating that the `artist_popularity` does depend on the `artist`. I repeated this same procedure with the `danceability` and `artist_popularity`, and got a p-value of <strong>0.055</strong>, which is just over the significance level, meaning we cannot conclude that `artist_popularity` is dependent on `danceability`.
+
 ## Hypothesis Testing
+As mentioned in one of the previous tables, `dance` artists have the highest average `artist_popularity` score across all of the genres I am looking at. In this section, I am conducting a permutation test to investigate whether dance artists are more popular than artists of other genres. More specifically:
+- <strong>Null Hypothesis:</strong> Dance artists have equal artist popularity scores to non-dance artists
+- <strong>Alternate Hypothesis:</strong> Dance artists are have higher artist popularity scores than non-dance artists
+- <strong>Test Statistic: </strong> Difference in means (Dance artist mean - non-dance artist mean for each simulation)
+- <strong>Significance Level: </strong>0.05
+By repeatedly shuffling the genre 1000 times, I collected 1000 mean differences in artist popularity between dance and non-dance artists.
+<iframe
+  src="assets/dance_hypothesis_test.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+The observed test statistic of <strong>16.668</strong> is represented as the red line in the plot. Since the p_value that we found <strong>0.0</strong> is < 0.05 which is the significance level that we set, we reject the null hypothesis, indicating that the mean `artist_popularity` is indeed higher in `dance` artists than non-dance artists.
 
 ## Framing a Prediction Problem
 
