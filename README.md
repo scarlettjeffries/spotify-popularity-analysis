@@ -166,6 +166,7 @@ In this permutation test, the null hypothesis would claim that the model perform
 - <strong>Alternate Hypothesis:</strong> The model performs more accurately for less-popular artists than popular artists
 - <strong>Test Statistic: </strong> Difference in R<sup>2</sup> (less-popular artist R<sup>2</sup> - popular artist R<sup>2</sup>)
 - <strong>Significance Level: </strong>0.05
+
 By repeatedly shuffling the genre 1000 times, I collected 1000 mean differences in R<sup>2</sup> between less-popular and popular artists. Additionally, I have plotted the distribution of test statistics and the observed statistic below, following the same format as the previous permutation test plots.
 <iframe
   src="assets/artist_popularity_difference_perm.html"
@@ -178,4 +179,4 @@ As we can see, the p-value is <strong>0.027</strong>, which is < 0.05 (threshold
 
 
 ## Conclusion
-Overall, `artist_popularity` seemed to be the most influential factor in predicting a song's popularity. Additionally, the ridge regression model predicted with the most accuracy for less-popular artists. While I wish the model was able to perform more accurately overall, there was still significant improvement betwen the baseline and final model. If you have read this far, thank you! And, if you have any <strong>danceable</strong> or <strong>energetic</strong> songs that are <i>not</i> popular yet, feel free to send them my way at scjeffries@ucsd.edu (I am always looking for new, fun songs). Thank you!
+Overall, `artist_popularity` seemed to be the most influential factor in predicting a song's popularity. Additionally, the ridge regression model predicted with the most accuracy for less-popular artists. While I wish the model was able to perform more accurately overall, there was still significant improvement betwen the baseline and final model. If you have read this far, thank you! And, if you have any <strong>danceable</strong> or <strong>energetic</strong> songs that are <i>not</i> popular yet, feel free to send them my way at scjeffries@ucsd.edu (I am always looking for new, fun songs). Thanks!
