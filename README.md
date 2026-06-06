@@ -43,6 +43,7 @@ Take a look at the first few rows of the finalized dataset below: <br>
 |         9 |     402 | ['Bryan Adams']            | Summer Of '69           |                 0 |          0.5   |    0.908 | rock    |                79   |
 
 ### Univariate Analysis
+First, I wanted to take a look at the general distribution of song popularity scores, to get a better understanding of the data.
 <iframe
   src="assets/song_popularity.html"
   width="800"
@@ -50,7 +51,16 @@ Take a look at the first few rows of the finalized dataset below: <br>
   frameborder="0"
 ></iframe>
 
+As you can see, there seems to be a disproportionate amount of songs with a popularity score between 0-4. In order to reduct the effects of this on the analysis, while still preserving its impact in the data, I filtered the `song_popularity` to only contain songs with a popularity score greater than 2. See the results of that below.
+<iframe
+  src="assets/song_popularity2.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
 ### Bivariate Analysis
+
 
 ### Interesting Aggregates
 
